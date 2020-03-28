@@ -29,8 +29,8 @@ for imageFile, segFile, _, _, _, _ in tqdm(trainFilePairList):
     segImage = colorMapMat[seg]
 
     res = cv2.addWeighted(img_bgr, 0.8, segImage, 0.9, 0)
-    cv2.imshow('VPGNet Dataset Quick Inspector', res)
+    cv2.imshow('CULane Dataset Quick Inspector', res)
     k = cv2.waitKey(1) & 0xff
     if k == 27:
         break
-cv2.destroyWindow('VPGNet Dataset Quick Inspector')
+cv2.destroyWindow('CULane Dataset Quick Inspector')
