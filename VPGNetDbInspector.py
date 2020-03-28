@@ -5,6 +5,34 @@ import os
 from tqdm import tqdm
 
 
+markClass = [
+    ### Lane and road markings (4th channel) ###
+    'background',
+    'lane_solid_white',
+    'lane_broken_white',
+    'lane_double_white',
+    'lane_solid_yellow',
+    'lane_broken_yellow',
+    'lane_double_yellow',
+    'lane_broken_blue',
+    'lane_slow',
+    'stop_line',
+    'arrow_left',
+    'arrow_right',
+    'arrow_go_straight',
+    'arrow_u_turn',
+    'speed_bump',
+    'crossWalk',
+    'safety_zone',
+    'other_road_markings']
+
+vpClass = [
+    ### Vanishing Points (5th channel) ###
+    'background',
+    'easy',
+    'hard',
+]
+
 # Get the list of all files in directory tree at given path
 listOfFiles = list()
 for (dirpath, dirnames, filenames) in os.walk(r'H:\VPGNet-DB-5ch'):
@@ -22,10 +50,10 @@ for i in range(0, 18):
 for imageFile in tqdm(listOfFiles):
     data = scipy.io.loadmat(imageFile)  # 读取mat文件
     rgb_seg_vp = data['rgb_seg_vp']
-    rgb = rgb_seg_vp[:, :, 0:3]
+    rgb = rgb_seg_vp[:, :, 0: 3]
     seg = rgb_seg_vp[:, :, 3]
     vp = rgb_seg_vp[:, :, 4]
-    img_bgr = rgb[:, :, ::-1]
+    img_bgr = rgb[:, :, :: -1]
     segImage = colorMapMat[seg]
     x = np.nonzero(vp)[1]
     y = np.nonzero(vp)[0]
