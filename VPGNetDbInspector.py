@@ -2,40 +2,47 @@ import scipy.io
 import numpy as np
 import cv2
 import os
+from tqdm import tqdm
 
 
 # Get the list of all files in directory tree at given path
 listOfFiles = list()
-for (dirpath, dirnames, filenames) in os.walk('.'):
+for (dirpath, dirnames, filenames) in os.walk(r'H:\VPGNet-DB-5ch'):
     listOfFiles += [os.path.join(dirpath, file) for file in filenames]
-fast = cv2.FastFeatureDetector_create(threshold=100)
-colorMapMat=np.zeros((18,3),dtype=np.uint8)
-laneColor=np.array([0,255,0],dtype=np.uint8)
-for i in range(0,18):
-    if i>=1 and i<=7:
-        colorMapMat[i]=laneColor
-    elif i!=0:
-        colorMapMat[i]=np.random.randint(0,255,dtype=np.uint8,size=3)
 
-# Print all default params
-print( "Threshold: {}".format(fast.getThreshold()) )
-print( "nonmaxSuppression:{}".format(fast.getNonmaxSuppression()) )
-print( "neighborhood: {}".format(fast.getType()) )    
-for imageFile in listOfFiles[1:-1]:
+colorMapMat = np.zeros((18, 3), dtype=np.uint8)
+laneColor = np.array([0, 255, 0], dtype=np.uint8)
+vpColorMapMat = np.array([[0, 255, 0], [0, 0, 255]], dtype=np.uint8)
+for i in range(0, 18):
+    if i >= 1 and i <= 7:
+        colorMapMat[i] = laneColor
+    elif i != 0:
+        colorMapMat[i] = np.random.randint(0, 255, dtype=np.uint8, size=3)
+
+for imageFile in tqdm(listOfFiles):
     data = scipy.io.loadmat(imageFile)  # 读取mat文件
     rgb_seg_vp = data['rgb_seg_vp']
     rgb = rgb_seg_vp[:, :, 0:3]
     seg = rgb_seg_vp[:, :, 3]
     vp = rgb_seg_vp[:, :, 4]
     img_bgr = rgb[:, :, ::-1]
-    segImage=colorMapMat[seg]
-    # print(segImage)
-    # Initiate FAST object with default values
+    segImage = colorMapMat[seg]
+    x = np.nonzero(vp)[1]
+    y = np.nonzero(vp)[0]
+    if x.size > 0 and y.size > 0:
+        vpPoint = (x[0], y[0])
+        vpLevel = vp[(y, x)]
+    else:
+        vpPoint = (-1, -1)
 
-    # find and draw the keypoints
-    kp = fast.detect(img_bgr,None)
-    # img2 = cv2.drawKeypoints(img_bgr, kp, None, color=(255,0,0))
-    res = cv2.addWeighted(img_bgr, 1, segImage, 0.6, 0)
-    cv2.imshow('BGRimage', res)
-    cv2.waitKey(70)
-cv2.destroyWindow('BGRimage')
+    if vpPoint[0] > 1 and vpPoint[1] > 1:
+        c = vpColorMapMat[vpLevel-1][0].tolist()
+        cv2.circle(segImage, vpPoint, 15, (c[0], c[1],
+                                           c[2]), thickness=-1, lineType=8)
+
+    res = cv2.addWeighted(img_bgr, 1, segImage, 0.7, 0)
+    cv2.imshow('VPGNet Dataset Quick Inspector', res)
+    k = cv2.waitKey(1) & 0xff
+    if k == 27:
+        break
+cv2.destroyWindow('VPGNet Dataset Quick Inspector')
