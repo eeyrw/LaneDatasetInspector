@@ -28,7 +28,7 @@ for imageFile, segFile, _, _, _, _ in tqdm(trainFilePairList):
     # seg = np.max(seg,axis=2)
     segImage = colorMapMat[seg]
 
-    res = cv2.addWeighted(img_bgr, 0.8, segImage, 0.9, 0)
+    res = cv2.addWeighted(img_bgr, 0.7, segImage, 0.7, 0.4)
     cv2.imshow('CULane Dataset Quick Inspector', res)
     k = cv2.waitKey(1) & 0xff
     if k == 27:
