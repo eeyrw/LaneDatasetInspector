@@ -1,0 +1,251 @@
+{
+  "name": "010b0600-ae1f7be5.jpg",
+  "attributes": {
+    "weather": "snowy",
+    "scene": "undefined",
+    "timeofday": "daytime"
+  },
+  "timestamp": 10000,
+  "labels": [
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "parallel",
+        "laneStyle": "solid",
+        "laneType": "road curb"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              1137.292164,
+              455.332694
+            ],
+            [
+              0,
+              414.789372
+            ]
+          ],
+          "types": "LL",
+          "closed": false
+        }
+      ],
+      "id": 10674
+    },
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "parallel",
+        "laneStyle": "solid",
+        "laneType": "road curb"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              1025.018348,
+              544.735917
+            ],
+            [
+              1014.622624,
+              559.28993
+            ],
+            [
+              1013.583052,
+              568.646082
+            ],
+            [
+              1028.137066,
+              581.120951
+            ]
+          ],
+          "types": "CCCL",
+          "closed": false
+        }
+      ],
+      "id": 10675
+    },
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "vertical",
+        "laneStyle": "solid",
+        "laneType": "single white"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              191.281315,
+              614.387266
+            ],
+            [
+              451.174406,
+              607.110259
+            ],
+            [
+              715.225785,
+              586.318812
+            ],
+            [
+              969.921013,
+              592.556245
+            ]
+          ],
+          "types": "CCCL",
+          "closed": false
+        }
+      ],
+      "id": 10676
+    },
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "vertical",
+        "laneStyle": "solid",
+        "laneType": "single white"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              942.892132,
+              602.95197
+            ],
+            [
+              751.610817,
+              605.031114
+            ],
+            [
+              589.091058,
+              610.861815
+            ],
+            [
+              405.433221,
+              622.703845
+            ]
+          ],
+          "types": "CCCL",
+          "closed": false
+        }
+      ],
+      "id": 10677
+    },
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "parallel",
+        "laneStyle": "solid",
+        "laneType": "single white"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              0,
+              463.649273
+            ],
+            [
+              471.272846,
+              466.150316
+            ]
+          ],
+          "types": "LL",
+          "closed": false
+        }
+      ],
+      "id": 10678
+    },
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "parallel",
+        "laneStyle": "solid",
+        "laneType": "single white"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              437.659964,
+              471.965852
+            ],
+            [
+              0,
+              469.886708
+            ]
+          ],
+          "types": "LL",
+          "closed": false
+        }
+      ],
+      "id": 10679
+    },
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "parallel",
+        "laneStyle": "solid",
+        "laneType": "single white"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              0,
+              518.656258
+            ],
+            [
+              416.205639,
+              472.553479
+            ]
+          ],
+          "types": "LL",
+          "closed": false
+        }
+      ],
+      "id": 10680
+    },
+    {
+      "category": "lane",
+      "attributes": {
+        "laneDirection": "parallel",
+        "laneStyle": "solid",
+        "laneType": "single white"
+      },
+      "manualShape": true,
+      "manualAttributes": true,
+      "poly2d": [
+        {
+          "vertices": [
+            [
+              0,
+              532.261049
+            ],
+            [
+              490.678155,
+              474.044998
+            ]
+          ],
+          "types": "LL",
+          "closed": false
+        }
+      ],
+      "id": 10681
+    }
+  ]
+}

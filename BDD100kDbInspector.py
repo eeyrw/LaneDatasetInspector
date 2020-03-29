@@ -6,28 +6,43 @@ from tqdm import tqdm
 import json
 import pickle
 
-BDD100kRootDir = r'H:\BDD100K\bdd100k'
+BDD100kRootDir = r'H:\BDD100K'
+
+trainJsonFilePath = os.path.join(
+    BDD100kRootDir, r'labels\bdd100k_labels_images_train.json')
+trainPickleFilePath = os.path.join(
+    BDD100kRootDir, r'labels\bdd100k_labels_images_train.pkl')
+trainLaneOnlyPickleFilePath = os.path.join(
+    BDD100kRootDir, r'labels\bdd100k_labels_images_train_lane_only.pkl')
 
 
 
-trainJsonFilePath = os.path.join(BDD100kRootDir, r'labels\bdd100k_labels_images_train.json')
-trainPickleFilePath = os.path.join(BDD100kRootDir, r'labels\bdd100k_labels_images_train.pkl')
 
-if not os.path.isfile(trainPickleFilePath):
-    with open(trainJsonFilePath, 'r') as f:
-        data = json.load(f)
-    with open(trainPickleFilePath, 'wb') as f:
-        pickle.dump(data, f)
+if not os.path.isfile(trainLaneOnlyPickleFilePath):
+    if not os.path.isfile(trainPickleFilePath):
+        with open(trainJsonFilePath, 'r') as f:
+            data = json.load(f)
+        with open(trainPickleFilePath, 'wb') as f:
+            pickle.dump(data, f)
+    else:
+        with open(trainPickleFilePath, 'rb') as f:
+            # The protocol version used is detected automatically, so we do not
+            # have to specify it.
+            data = pickle.load(f)
+    for entry in data:
+        entry['labels'] = list(filter(
+            lambda x: x['category'] == 'lane', entry['labels']))
+        laneData.append(entry)
+
+    with open(trainLaneOnlyPickleFilePath, 'wb') as f:
+        pickle.dump(laneData, f)
 else:
-    with open(trainPickleFilePath, 'rb') as f:
-    # The protocol version used is detected automatically, so we do not
-    # have to specify it.
-        data = pickle.load(f)
+    with open(trainLaneOnlyPickleFilePath, 'rb') as f:
+        laneData = pickle.load(f)
 
 # 写入 JSON 数据
 with open('example.json', 'w') as f:
-    json.dump(data[0], f)
-
+    json.dump(laneData[np.random.randint(0,60000)], f,indent=2)
 # trainIndexFilePath = os.path.join(CULaneRootDir, r'list\train_gt.txt')
 
 # trainFilePairList = []
