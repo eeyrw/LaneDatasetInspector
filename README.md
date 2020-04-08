@@ -7,9 +7,9 @@ python TuSimpleDbInspector.py --rootDir DATA_SET_DIR
 python VPGNetDbInspector.py --rootDir DATA_SET_DIR
 ```
 
-![1](screenshot/1.png)
-![2](screenshot/2.png)
-![3](screenshot/3.png)
+![1](screenshot/1.PNG)
+![2](screenshot/2.PNG)
+![3](screenshot/3.PNG)
 
 PS: BDD100kDbInspector.py is under construction.
 
