@@ -25,4 +25,6 @@ cv2
 
 tqdm
 
+# Contribution from other GitHub users:
 
+The implementation of visualizer for caltech-lanes (CaltechLanesDbInspector.py) is done by github user [sandeepnmenon](https://github.com/sandeepnmenon).
