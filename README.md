@@ -5,6 +5,7 @@ There are some simple python code for walking through the popular lane detection
 python CULaneDbInspector.py --rootDir DATA_SET_DIR
 python TuSimpleDbInspector.py --rootDir DATA_SET_DIR 
 python VPGNetDbInspector.py --rootDir DATA_SET_DIR
+python CaltechLanesDbInspector.py --rootDir DATA_SET_DIR
 ```
 
 ![1](screenshot/1.PNG)
