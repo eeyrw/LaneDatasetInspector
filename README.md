@@ -11,6 +11,7 @@ python CaltechLanesDbInspector.py --rootDir DATA_SET_DIR
 ![1](screenshot/1.PNG)
 ![2](screenshot/2.PNG)
 ![3](screenshot/3.PNG)
+![3](screenshot/4.PNG)
 
 PS: BDD100kDbInspector.py is under construction.
 
