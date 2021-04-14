@@ -4,6 +4,7 @@ import cv2
 import os
 from tqdm import tqdm
 import argparse
+from scipy.interpolate import interp1d
 
 
 def walkThroughDataset(dataSetDir):
@@ -29,9 +30,23 @@ def walkThroughDataset(dataSetDir):
                     type = label['type']
                     if type == 'spline':
                         points = label['points']
-                        for point in points:
-                            coord = (int(point[0]), int(point[1]))
-                            cv2.circle(img, coord, 5, subtype_colors[subtype], thickness=-1, lineType=8)
+                        y_coords = points[:,1]
+                        if len(y_coords) != len(set(y_coords)):
+                            # If multiple x values, cubic interpolation fails. Plotting only the 4 points in such cases
+                            for point in points:
+                                coord = (int(point[0]), int(point[1]))
+                                cv2.circle(img, coord, 5, subtype_colors[subtype], thickness=-1, lineType=8)
+                            cv2.imwrite(f"{points}.png",img)
+                        else:
+                            x_coords = points[:,0]
+                            spline_function = interp1d(y_coords, x_coords, kind='cubic')
+                            y_min, y_max = min(y_coords), max(y_coords)
+                            ynew = np.arange(y_min, y_max, 1)
+                            xnew = spline_function(ynew)
+                            points_new = [(x,y) for x,y in zip(xnew, ynew)]
+                            for point in points_new:
+                                coord = (int(point[0]), int(point[1]))
+                                cv2.circle(img, coord, 5, subtype_colors[subtype], thickness=-1, lineType=8)
 
             cv2.imshow('Caltech Lanes Dataset Quick Inspector', img)
             k = cv2.waitKey(1) & 0xff
