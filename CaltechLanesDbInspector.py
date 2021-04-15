@@ -30,7 +30,6 @@ def walkThroughDataset(dataSetDir):
                         points = label['points']
                         points_new = get_lane_points(spline=points, interval=0.02)
 
-                        # points_new = [(x,y) for x,y in zip(xnew, ynew)]
                         for point in points_new:
                             coord = (int(point[0]), int(point[1]))
                             cv2.circle(img, coord, 4, subtype_colors[subtype], thickness=-1, lineType=8)
